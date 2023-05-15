@@ -1,8 +1,8 @@
 .DS_Store
 node_modules
-bin
+.yalc
+yalc.lock
 
-# local env files
 .env.local
 .env.*.local
 
@@ -19,6 +19,18 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
-
-package-lock.json
+.vscode
 *.tgz
+
+/.husky
+/.commitlintrc.json
+/.dirlintrc.yml
+/.editorconfig
+/.eslintignore
+/.eslintrc.js
+/.gitignore
+/.lintstagedrc.json
+/src
+/tsconfig.json
+/CHANGELOG.md
+/.nvmrc

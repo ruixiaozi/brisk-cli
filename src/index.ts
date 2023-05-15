@@ -4,8 +4,8 @@ import { program } from 'commander';
 import path from 'path';
 import fs from 'fs';
 import projectPackageJson from './package.tpl.json';
-import packageJson from '../package.json';
 
+const packageJson = require(path.join(__dirname, '../package.json'));
 
 program.name('brisk').description('brisk系列脚手架')
   .version(packageJson.version, '-v, --vers');
@@ -21,6 +21,7 @@ program.command('create')
       name: projectName,
     }, undefined, 2));
     fs.cpSync(path.join(__dirname, '../template'), projectDir, { recursive: true });
+    fs.renameSync(path.join(projectDir, 'gitignore.tpl'), path.join(projectDir, '.gitignore'));
     execSync('git init', { cwd: projectDir, stdio: 'inherit' });
     execSync('npm i', { cwd: projectDir, stdio: 'inherit' });
     console.log('\n\n\n');

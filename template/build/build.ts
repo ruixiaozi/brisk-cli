@@ -20,4 +20,4 @@ fs.writeFileSync(path.join(__dirname, '../dist/package.json'), JSON.stringify({
   },
 }, undefined, 2));
 
-execSync('npx copyfiles ./src/resources/**/* ./dist');
+execSync('npx copyfiles -u 2 ./src/resource/**/* ./dist');
