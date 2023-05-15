@@ -1,0 +1,45 @@
+{
+  "name": "",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "nodemon  src/launcher.ts --model=development --exec \"ts-node -C ttypescript\"",
+    "build": "ts-node build/build.ts",
+    "prebuild": "rimraf ./dist",
+    "prepare": "husky install",
+    "lint": "eslint src/**/*.ts"
+  },
+  "dependencies": {
+    "brisk-controller": "0.0.1",
+    "brisk-ioc": "0.0.1",
+    "brisk-log": "0.0.1",
+    "brisk-orm": "0.0.1",
+    "brisk-ts-extends": "0.0.1",
+    "dotenv": "16.0.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "16.2.1",
+    "@commitlint/config-conventional": "16.2.1",
+    "@types/node": "17.0.18",
+    "@typescript-eslint/eslint-plugin": "5.36.1",
+    "@typescript-eslint/parser": "5.36.1",
+    "@vercel/ncc": "0.36.1",
+    "bytenode": "1.4.1",
+    "copyfiles": "2.4.1",
+    "eslint": "8.10.0",
+    "eslint-config-brisk": "1.0.3",
+    "eslint-plugin-deprecation": "1.4.1",
+    "husky": "7.0.4",
+    "lint-staged": "12.3.4",
+    "nodemon": "2.0.21",
+    "rimraf": "3.0.2",
+    "ts-node": "10.9.1",
+    "ttypescript": "1.5.13",
+    "typescript": "4.8",
+    "typescript-transform-paths": "3.3.1",
+    "uglify-js": "2.4.11"
+  },
+  "overrides": {
+    "@jest/expect-utils": "29.4.1"
+  }
+}
