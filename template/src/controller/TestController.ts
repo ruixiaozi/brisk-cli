@@ -8,11 +8,11 @@ import { Log, Logger } from 'brisk-log';
 export class TestController {
 
   @AutoWrite()
-  private testService?: TestService;
+  private testService!: TestService;
 
 
   @Log(Symbol(TestController.name))
-  private logger?: Logger;
+  private logger!: Logger;
 
 
   // GET /test/hello
@@ -22,8 +22,8 @@ export class TestController {
     method: BRISK_CONTROLLER_METHOD_E.GET,
   })
   async hello(@InQuery() name?: string): Promise<ResultVo<TestVo[]>> {
-    this.logger?.info(`hello ${name}`);
-    const res = await this.testService?.hello();
+    this.logger.info(`hello ${name}`);
+    const res = await this.testService.hello();
     return new ResultVo(true, `hello ${name}`, res);
   }
 

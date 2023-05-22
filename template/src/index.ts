@@ -13,7 +13,7 @@ import './controller';
 
 // 配置日志
 configure({
-  level: process.env.NODE_ENV === 'development' ? LOGGER_LEVEL_E.info : LOGGER_LEVEL_E.warn,
+  level: process.env.NODE_ENV === 'development' ? LOGGER_LEVEL_E.debug : LOGGER_LEVEL_E.info,
   enableFile: true,
 });
 
@@ -28,8 +28,10 @@ const logger = getLogger(Symbol('default'));
   }
   BriskORM.connect(typeCast<BriskOrmConnectOption>(db));
   // 同步数据库
-  await BriskORM.autoSync();
-  await BriskController.start(3000, {
+  if (process.env.NODE_ENV === 'development') {
+    await BriskORM.autoSync();
+  }
+  await BriskController.start(Number(process.env.PORT || 3000), {
     // 是否开启跨域
     cors: true,
     swagger: process.env.NODE_ENV === 'development',
@@ -42,4 +44,8 @@ const logger = getLogger(Symbol('default'));
 process.on('exit', async() => {
   await BriskController.distory();
   await BriskORM.distory();
+});
+
+process.on('uncaughtException', (error) => {
+  logger.error('global error:', error);
 });

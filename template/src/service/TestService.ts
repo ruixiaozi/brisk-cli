@@ -8,18 +8,19 @@ import { Log, Logger } from 'brisk-log';
 export class TestService {
 
   @AutoWrite()
-  private testDao?: TestDao;
+  private testDao!: TestDao;
 
   @Log(Symbol(TestService.name))
-  private logger?: Logger;
+  private logger!: Logger;
 
   /**
    * hello
    * @returns
    */
   public async hello(): Promise<TestVo[]> {
-    this.logger?.info('hello');
-    const list = (await this.testDao?.list())?.map((item) => typeCast<TestVo>(item));
+    this.logger.info('hello');
+    const list = (await this.testDao.list())?.map((item) => typeCast<TestVo>(item));
     return list || [];
   }
+
 }
