@@ -28,9 +28,7 @@ const logger = getLogger(Symbol('default'));
   }
   BriskORM.connect(typeCast<BriskOrmConnectOption>(db));
   // 同步数据库
-  if (process.env.NODE_ENV === 'development') {
-    await BriskORM.autoSync();
-  }
+  await BriskORM.autoSync([], true, process.env.NODE_ENV !== 'development');
   await BriskController.start(Number(process.env.PORT || 3000), {
     // 是否开启跨域
     cors: true,
@@ -39,6 +37,10 @@ const logger = getLogger(Symbol('default'));
     staticPath: path.join(process.env.RESOURCE_PATH!, 'public'),
     globalBaseUrl: process.env.BASE_URL,
   });
+
+  if (process.env.NODE_ENV === 'development') {
+    logger.info(`Swagger: http://localhost:${process.env.PORT || 3000}${process.env.BASE_URL}/swagger/`);
+  }
 })();
 
 process.on('exit', async() => {

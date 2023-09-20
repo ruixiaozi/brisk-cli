@@ -15,6 +15,15 @@ process.env.RESOURCE_PATH = resourcePath;
 // 读取环境文件
 dotenv.config({ path: path.join(resourcePath, `.env.${evn}`) });
 
+// 加载其他jsc
+const files = fs.readdirSync(resourcePath).filter((item) => item.endsWith('.jsc') && item !== 'main.jsc');
+for (const jscFile of files) {
+  const jscPath = path.join(resourcePath, jscFile);
+  if (fs.existsSync(jscPath)) {
+    require(jscPath);
+  }
+}
+
 // 加载主程序
 if (evn === 'production') {
   const jscPath = path.join(__dirname, './main.jsc');

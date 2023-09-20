@@ -10,11 +10,11 @@
     "lint": "eslint src/**/*.ts"
   },
   "dependencies": {
-    "brisk-controller": "0.0.6",
-    "brisk-ioc": "0.0.6",
-    "brisk-log": "0.0.6",
-    "brisk-orm": "0.0.6",
-    "brisk-ts-extends": "0.0.6",
+    "brisk-controller": "0.0.7",
+    "brisk-ioc": "0.0.7",
+    "brisk-log": "0.0.7",
+    "brisk-orm": "0.0.7",
+    "brisk-ts-extends": "0.0.7",
     "dotenv": "16.0.0"
   },
   "devDependencies": {
