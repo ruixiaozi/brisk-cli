@@ -26,20 +26,28 @@ const logger = getLogger(Symbol('default'));
     logger?.error('no db config');
     return;
   }
-  BriskORM.connect(typeCast<BriskOrmConnectOption>(db));
-  // 同步数据库
-  await BriskORM.autoSync([], true, process.env.NODE_ENV !== 'development');
+  await BriskORM.connect({
+    ...typeCast<BriskOrmConnectOption>(db),
+     // 同步数据库
+    autoSync: {
+      enable: true,
+      enableUpdateTable: true,
+      enableDeleteTable: true,
+      expectTables: [],
+    },
+  });
+
   await BriskController.start(Number(process.env.PORT || 3000), {
     // 是否开启跨域
     cors: true,
-    swagger: process.env.NODE_ENV === 'development',
+    swagger: true,
     // 静态文件，可直接访问
     staticPath: path.join(process.env.RESOURCE_PATH!, 'public'),
     globalBaseUrl: process.env.BASE_URL,
   });
 
   if (process.env.NODE_ENV === 'development') {
-    logger.info(`Swagger: http://localhost:${process.env.PORT || 3000}${process.env.BASE_URL}/swagger/`);
+    logger.info(`Swagger: http://localhost:${process.env.PORT || 3000}${process.env.BASE_URL}swagger/index.html`);
   }
 })();
 
